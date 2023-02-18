@@ -10,10 +10,11 @@ app.use(express.json());
 const { getMeme,
         investMeme,
         changeMemePrice,
-        dumpMeme} = require('./controller')
+        sellMeme} = require('./controller')
 
 app.get("/api/meme", getMeme);
 app.post("/api/meme", investMeme)
 app.put("/api/meme/:id", changeMemePrice)
+app.delete("/api/meme/:id", sellMeme)
 
 app.listen(4000, () => console.log("Server running on 4000"));

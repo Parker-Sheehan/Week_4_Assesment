@@ -1,5 +1,4 @@
 const bodyParser = require("body-parser");
-
 arr = [
     {
         name:"Doge",
@@ -36,7 +35,24 @@ module.exports = {
         idCount++
     },
     changeMemePrice: (req,res) => {
-        console.log('yay')
+        let {id} = req.params
+        let {type} = req.body
+        for(let i = 0; i< arr.length; i++){
+            if(arr[i].id === +id && type === "pump"){
+                arr[i].price += 100
+            }else if(arr[i].id === +id && type === "dump"){
+                arr[i].price -= 100
+            }
+        }
+        res.status(200).send(arr)
+    },
+    sellMeme: (req,res) => {
+        let {id} = req.params
+        for(let i = 0; i<arr.length;i++){
+            if(arr[i].id === +id){
+                arr.splice([i], 1)
+            }
+        }
+        res.status(200).send(arr)
     }
-
 }
